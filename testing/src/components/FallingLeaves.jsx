@@ -6,14 +6,14 @@ const generateRandomLeaves = (count) => {
   for (let i = 0; i < count; i++) {
     leaves.push({
       id: i,
-      // Random horizontal start position (in percentage)
+
       left: Math.random() * 100,
-      // Random delay before the animation starts
+  
       delay: Math.random() * 5,
-      // Random animation duration between 5 and 10 seconds
+   
       duration: 5 + Math.random() * 5,
-      // Optionally, random size for variety
-      size: 20 + Math.random() * 20, // size in pixels
+ 
+      size: 30 + Math.random() * 50, 
     });
   }
   return leaves;

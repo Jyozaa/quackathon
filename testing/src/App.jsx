@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Section from './components/Section';
+import Section from './components/UnityGame';
 import AuthModal from './components/AuthModal';
 import Profile from './components/Profile';
 import Discovery from './components/Discovery';
@@ -11,8 +11,11 @@ import PlantDetail from './components/PlantDetail';
 import AdminDashboard from './components/AdminDashboard';
 import FallingLeaves from './components/FallingLeaves';
 import ActivitiesPage from './components/ActivitiesPage';
+import Chatbot from './components/Chatbot';
+import CloudBackground from './components/CloudBackground';
+import Chatroom from './components/Chatroom';
 
-function RoutesWrapper({ user, onLogout, openAuthModal }) {
+function RoutesWrapper({ user, onLogout, openAuthModal, onJoinVolunteer }) {
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -23,24 +26,23 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
 
   return (
     <Routes>
-      {/* Landing page */}
       <Route
         path="/"
         element={
           <div style={{ position: 'relative', minHeight: '100vh' }}>
-            {/* Absolutely positioned container for tree & falling leaves */}
             <div
               style={{
                 position: 'absolute',
-                top: 200,
+                top: 100,
                 right: -200,
-                width: '1250px',
+                width: '1350px',
                 height: 'auto',
                 overflow: 'hidden',
-                zIndex: 0,
+                zIndex: 1, 
               }}
             >
               <img
+                className='m-0 p-0'
                 src="/pixel_tree.png"
                 alt="Pixel Tree"
                 style={{
@@ -49,12 +51,26 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
                   height: 'auto',
                 }}
               />
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+              <img
+                src="/bird.gif"
+                alt="Bird"
+                style={{
+                  position: 'absolute',
+                  top: '200px',
+                  left: '300px',
+                  width: '70px',
+                  zIndex: 2,
+                  pointerEvents: 'none',
+                }}
+              />
+
+              <div style={{ position: 'absolute', inset: 0 }}>
                 <FallingLeaves count={15} />
               </div>
             </div>
-            {/* Main content */}
-            <div style={{ position: 'relative', zIndex: 1 }}>
+
+  
+            <div style={{ position: 'relative', zIndex: 2 }}>
               <Hero user={user} openAuthModal={openAuthModal} />
               <Section />
             </div>
@@ -62,7 +78,6 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
         }
       />
 
-      {/* Admin dashboard */}
       <Route
         path="/admin"
         element={
@@ -80,7 +95,6 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
         }
       />
 
-      {/* Normal user profile */}
       <Route
         path="/profile"
         element={
@@ -98,7 +112,7 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
         }
       />
 
-      {/* Discovery page */}
+   
       <Route
         path="/discover"
         element={
@@ -116,7 +130,7 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
         }
       />
 
-      {/* Plant detail page */}
+
       <Route
         path="/details/:id"
         element={
@@ -134,10 +148,15 @@ function RoutesWrapper({ user, onLogout, openAuthModal }) {
         }
       />
 
-      {/* Activities page */}
       <Route
         path="/activities"
-        element={<ActivitiesPage user={user} />}
+        element={<ActivitiesPage user={user} onJoinVolunteer={onJoinVolunteer} />}
+      />
+
+
+      <Route
+        path="/chatroom"
+        element={user ? <Chatroom user={user} /> : <div className="nes-container with-title" style={{ margin: '2rem auto', maxWidth: '600px', padding: '2rem' }}><p className="title">Access Denied</p><p>Please log in to access the chatroom.</p></div>}
       />
     </Routes>
   );
@@ -162,19 +181,27 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="font-sans min-h-screen">
-        <Navbar openAuthModal={() => setIsModalOpen(true)} user={user} />
+   
+      <div style={{ position: 'relative', minHeight: '100vh' }}>
+        
+        <CloudBackground />
+
+        <Navbar openAuthModal={() => setIsModalOpen(true)} user={user} onLogout={handleLogout} />
+
         <RoutesWrapper
           user={user}
           onLogout={handleLogout}
           openAuthModal={() => setIsModalOpen(true)}
         />
+
         {isModalOpen && (
           <AuthModal
             onClose={() => setIsModalOpen(false)}
             onLoginSuccess={handleLoginSuccess}
           />
         )}
+
+        <Chatbot />
       </div>
     </BrowserRouter>
   );

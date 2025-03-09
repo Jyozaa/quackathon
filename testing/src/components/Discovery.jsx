@@ -3,13 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Discovery = () => {
-  const [items, setItems] = useState([]); // Holds fetched taxa data
+  const [items, setItems] = useState([]); 
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterType, setFilterType] = useState('all'); // "all", "flower", "plant", or "bug"
+  const [filterType, setFilterType] = useState('all'); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Determine query based on filter selection.
   let query = '';
   if (filterType === 'flower') {
     query = 'flower';
@@ -18,10 +17,10 @@ const Discovery = () => {
   } else if (filterType === 'bug') {
     query = 'bug';
   } else {
-    query = ''; // For "all", no query filter is applied.
+    query = ''; 
   }
 
-  // Function to fetch a Wikipedia summary for a given title
+
   const fetchWikipediaSummary = async (title) => {
     try {
       const response = await fetch(
@@ -37,7 +36,7 @@ const Discovery = () => {
     return null;
   };
 
-  // Enrich items: For each item missing a summary, try to fetch one from Wikipedia.
+ 
   const enrichItems = async (items) => {
     const enrichedItems = await Promise.all(
       items.map(async (item) => {
@@ -56,7 +55,6 @@ const Discovery = () => {
       setLoading(true);
       setError(null);
       try {
-        // Fetch from iNaturalist (requesting 12 items per page, English locale)
         const response = await fetch(
           `https://api.inaturalist.org/v1/taxa?page=${currentPage}&per_page=12&locale=en&q=${query}`
         );
@@ -77,7 +75,6 @@ const Discovery = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      {/* Sidebar Filter */}
       <aside style={{ width: '200px', padding: '1rem' }}>
         <h3>Filter</h3>
         <div>
@@ -188,7 +185,6 @@ const Discovery = () => {
           )}
         </div>
 
-        {/* Pagination Controls */}
         <div
           style={{
             marginTop: '1rem',

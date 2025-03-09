@@ -3,11 +3,22 @@ import React from 'react';
 
 function CalendarModal({ onClose }) {
   const schedule = [
+    { date: 'Jan 15, 2025', time: '10am GMT', activity: 'Green Explorers' },
+    { date: 'Jan 17, 2025', time: '10am GMT', activity: 'Nature Play' },
+    { date: 'Jan 10, 2025', time: '10am GMT', activity: 'Green Volunteers' },
+    { date: 'Jan 25, 2025', time: '10am GMT', activity: 'Green Volunteers' },
+    { date: 'Jan 27, 2025', time: '10am GMT', activity: 'Green Explorers' },
+    { date: 'Jan 30, 2025', time: '10am GMT', activity: 'Nature Play' },
+    { date: 'Feb 13, 2025', time: '10am GMT', activity: 'Green Explorers' },
+    { date: 'Feb 14, 2025', time: '10am GMT', activity: 'Green Explorers' },
+    { date: 'Feb 15, 2025', time: '10am GMT', activity: 'Nature Play' },
+    { date: 'Mar 17, 2025', time: '10am GMT', activity: 'Green Explorers' },
+    { date: 'Mar 17, 2025', time: '10am GMT', activity: 'Nature Play' },
+    { date: 'Mar 17, 2025', time: '10am GMT', activity: 'Green Explorers' },
     { date: 'Mar 9, 2025', time: '9:30am GMT', activity: 'Green Volunteers' },
     { date: 'Mar 10, 2025', time: '9:30am GMT', activity: 'Nature Play' },
     { date: 'Mar 16, 2025', time: '9:30am GMT', activity: 'Green Volunteers' },
     { date: 'Mar 17, 2025', time: '10am GMT', activity: 'Green Explorers' },
-    // Add more entries as needed
   ];
 
   return (

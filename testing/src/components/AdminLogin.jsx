@@ -8,9 +8,9 @@ function AdminLogin({ onLoginSuccess }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Hardcode admin credentials
+
     if (username === 'admin' && password === 'admin123') {
-      onLoginSuccess(); // Let the parent know admin is authenticated
+      onLoginSuccess(); 
     } else {
       setError('Invalid admin credentials');
     }

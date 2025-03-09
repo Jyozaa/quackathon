@@ -1,0 +1,32 @@
+/* src/components/CloudBackground.css */
+.cloud-container {
+    position: absolute;
+    top: -600px;
+    left: 0;
+    width: 400%; 
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; 
+  }
+  
+  .cloud {
+    position: absolute;
+    left: -100px; 
+    animation-name: moveClouds;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+    opacity: 0.5; 
+    width: 300px;
+  }
+  
+
+  @keyframes moveClouds {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(150vw); 
+    }
+  }
+  

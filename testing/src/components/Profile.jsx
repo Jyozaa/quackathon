@@ -9,23 +9,22 @@ function Profile({ user }) {
     interests: '',
   });
   const [isEditing, setIsEditing] = useState(false);
-  const [loading, setLoading] = useState(true); // loading state for GET
+  const [loading, setLoading] = useState(true); 
   const [message, setMessage] = useState('');
 
-  // Load profile data when component mounts
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await fetch(`http://localhost:3001/profile/${user.username}`);
         const data = await res.json();
-        // If data is returned, populate the formData
+    
         setFormData({
           personalInfo: data.personalInfo || '',
           email: data.email || '',
           phone: data.phone || '',
           interests: data.interests || '',
         });
-        // If there's no data, enable editing so user can enter info
+
         if (!data.personalInfo && !data.email && !data.phone && !data.interests) {
           setIsEditing(true);
         }
